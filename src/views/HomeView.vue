@@ -109,7 +109,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .container
   display flex
   flex-direction column
