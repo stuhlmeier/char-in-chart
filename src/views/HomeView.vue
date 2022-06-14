@@ -13,6 +13,7 @@
         </select>
         <input id="equation" v-model="equation" ref="equationInput" />
         <button v-if="graphType === 'polar'" @click="appendTheta()">θ</button>
+        <button @click="randomSample()">sample</button>
       </div>
       <div id="error">{{ errorMessage }}</div>
     </footer>
@@ -38,7 +39,16 @@ const samplePolarGraphs = [
   "2 cos(5θ)^2 + 2 sin(3θ)",
 ];
 
-const sampleCartesianGraphs = ["sin(x)", "tan(x)", "1 / x"];
+const sampleCartesianGraphs = [
+  "sin(x)",
+  "tan(x)",
+  "1 / x",
+  "csc(x)",
+  "2 sin(2x) - sin(x)",
+  "(2x^2 + 5)/(x^2 - 25)",
+  "e^(-x - 4) + sin(x)",
+  "1 / x^2",
+];
 
 export default defineComponent({
   name: "HomeView",
@@ -62,10 +72,8 @@ export default defineComponent({
       equation.value = sample(samplePolarGraphs) ?? "";
     });
 
-    watch(graphType, (value) => {
-      errorMessage.value = "";
-
-      switch (value) {
+    const randomSample = () => {
+      switch (graphType.value) {
         case "polar":
           equation.value = sample(samplePolarGraphs) ?? "";
           break;
@@ -73,6 +81,11 @@ export default defineComponent({
           equation.value = sample(sampleCartesianGraphs) ?? "";
           break;
       }
+    };
+
+    watch(graphType, () => {
+      errorMessage.value = "";
+      randomSample();
     });
 
     return {
@@ -85,6 +98,8 @@ export default defineComponent({
         equation.value += "θ";
         equationInput.value.focus();
       },
+
+      randomSample,
     };
   },
 });
