@@ -1,4 +1,5 @@
 <template>
+  <CornerComponent></CornerComponent>
   <div id="container">
     <router-view />
   </div>
@@ -14,3 +15,9 @@
   right 0
   bottom 0
 </style>
+<script>
+import CornerComponent from "@/components/CornerComponent";
+export default {
+  components: { CornerComponent },
+};
+</script>
