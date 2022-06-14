@@ -180,10 +180,10 @@ export default defineComponent({
   bottom 0
 
 #chart
+  display table
   margin auto
   padding 0
   white-space pre-line
-  overflow scroll
 
   font-size 8px
   font-weight bolder

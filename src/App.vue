@@ -13,9 +13,4 @@
   left 0
   right 0
   bottom 0
-
-#container
-  display grid
-  grid-template-columns 1fr
-  height 100%
 </style>

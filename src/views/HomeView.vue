@@ -110,19 +110,25 @@ export default defineComponent({
 </script>
 
 <style lang="stylus" scoped>
-.container
-  display flex
-  flex-direction column
-  align-items center
-  height 100vh
+header
+  position fixed
+  top 0
+  background-color white
+  width 100%
 
-ChartComponent
-  flex-grow 1
+  display flex
+  flex-direction row
+  justify-content center
 
 footer
-  flex 0 0 50px
-  height 50px
-  padding-top 20px
+  position fixed
+  bottom 0
+  background-color white
+  width 100%
+
+  min-height 80px
+  padding 20px
+  box-sizing border-box
 
   display flex
   flex-direction column
