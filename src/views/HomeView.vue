@@ -2,6 +2,12 @@
   <div class="container">
     <header>
       <h1>char-in-chart</h1>
+      <h6>
+        See also
+        <a href="https://values-in-vehicles.vercel.app/">values-in-vehicles</a>,
+        <a href="https://string-in-ships.vercel.app/">string-in-ships</a> and
+        <a href="https://text-in-train.vercel.app/">text-in-train</a>.
+      </h6>
     </header>
     <ChartComponent :equation="equation" :graph-type="graphType" />
     <footer>
@@ -117,8 +123,20 @@ header
   width 100%
 
   display flex
-  flex-direction row
-  justify-content center
+  flex-direction column
+  align-items center
+
+  gap 0
+
+  h1, h6
+    margin 10px
+
+  h6
+    font-size 10pt
+    color darkgray
+
+    a
+      color gray
 
 footer
   position fixed
