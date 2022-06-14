@@ -1,13 +1,44 @@
 <template>
   <div class="container">
-    <ChartComponent :equation="equation" />
-    <label>Input <input v-model="equation" /></label>
+    <header>
+      <h1>char-in-chart</h1>
+    </header>
+    <ChartComponent :equation="equation" :graph-type="graphType" />
+    <footer>
+      <div>
+        <label for="equation">Input: </label>
+        <select v-model="graphType">
+          <option value="polar">r=</option>
+          <option value="cartesian">y=</option>
+        </select>
+        <input id="equation" v-model="equation" ref="equationInput" />
+        <button v-if="graphType === 'polar'" @click="appendTheta()">θ</button>
+      </div>
+      <div id="error">{{ errorMessage }}</div>
+    </footer>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import ChartComponent from "@/components/ChartComponent.vue"; // @ is an alias to /src
+import { defineComponent, onMounted, provide, ref, watch } from "vue";
+import ChartComponent from "@/components/ChartComponent.vue";
+import { SET_ERROR_MESSAGE } from "@/injectionKeys";
+import { GraphType } from "@/types";
+import { sample } from "lodash";
+
+const samplePolarGraphs = [
+  "3 sin(5θ)",
+  "1",
+  "1/4 θ",
+  "sqrt(9 cos(2θ))",
+  "1/(sin(θ) + cos(θ))",
+  "4 + 2 csc(θ)",
+  "1.5(sin(θ) + sin(5θ/2))",
+  "1 / θ",
+  "2 cos(5θ)^2 + 2 sin(3θ)",
+];
+
+const sampleCartesianGraphs = ["sin(x)", "tan(x)", "1 / x"];
 
 export default defineComponent({
   name: "HomeView",
@@ -15,10 +46,45 @@ export default defineComponent({
     ChartComponent,
   },
   setup() {
-    const equation = ref("r=θ");
+    const equation = ref("");
+    const graphType = ref<GraphType>("polar");
+    const errorMessage = ref("");
+
+    const equationInput = ref<HTMLElement>(undefined as unknown as HTMLElement);
+
+    provide(
+      SET_ERROR_MESSAGE,
+      (message: string) => (errorMessage.value = message)
+    );
+
+    onMounted(() => {
+      graphType.value = "polar";
+      equation.value = sample(samplePolarGraphs) ?? "";
+    });
+
+    watch(graphType, (value) => {
+      errorMessage.value = "";
+
+      switch (value) {
+        case "polar":
+          equation.value = sample(samplePolarGraphs) ?? "";
+          break;
+        case "cartesian":
+          equation.value = sample(sampleCartesianGraphs) ?? "";
+          break;
+      }
+    });
 
     return {
       equation,
+      graphType,
+      errorMessage,
+      equationInput,
+
+      appendTheta: () => {
+        equation.value += "θ";
+        equationInput.value.focus();
+      },
     };
   },
 });
@@ -29,11 +95,22 @@ export default defineComponent({
   display flex
   flex-direction column
   align-items center
+  height 100vh
 
 ChartComponent
   flex-grow 1
 
-label
+footer
   flex 0 0 50px
   height 50px
+  padding-top 20px
+
+  display flex
+  flex-direction column
+  align-items center
+
+#error
+  color red
+  font-weight bold
+  text-decoration underline
 </style>
