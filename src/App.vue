@@ -1,17 +1,21 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="container">
+    <router-view />
+  </div>
 </template>
 
 <style lang="stylus">
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+  font-family monospace
+
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+
+#container
+  display grid
+  grid-template-columns 1fr
+  height 100%
 </style>
