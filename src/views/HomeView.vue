@@ -37,13 +37,17 @@ const samplePolarGraphs = [
   "1.5(sin(θ) + sin(5θ/2))",
   "1 / θ",
   "2 cos(5θ)^2 + 2 sin(3θ)",
+  "tan(4 θ) + cot(10 θ)",
 ];
 
 const sampleCartesianGraphs = [
   "sin(x)",
   "tan(x)",
-  "1 / x",
   "csc(x)",
+  "sin(x)^2 + cos(x)^2",
+  "sinh(x)",
+  "4 sin(2 sin(2 sin(2 sin(x))))",
+  "1 / x",
   "2 sin(2x) - sin(x)",
   "(2x^2 + 5)/(x^2 - 25)",
   "e^(-x - 4) + sin(x)",
