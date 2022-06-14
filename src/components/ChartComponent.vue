@@ -55,7 +55,7 @@ function plotAt(
 
 function newChart(): ChartState {
   const grid = [...new Array(height)].map(() =>
-    [...new Array(width)].map(() => ".")
+    [...new Array(width)].map(() => "·")
   );
   const touched = [...new Array(height)].map(() =>
     [...new Array(width)].map(() => false)
@@ -63,9 +63,9 @@ function newChart(): ChartState {
 
   const state: ChartState = { grid, touched };
 
-  for (let i = -hw; i <= hw; i++) state.grid[hh][hw + i] = "-";
-  for (let i = -hh; i <= hh; i++) state.grid[hh + i][hw] = "|";
-  state.grid[hh][hw] = "+";
+  for (let i = -hw; i <= hw; i++) state.grid[hh][hw + i] = "─";
+  for (let i = -hh; i <= hh; i++) state.grid[hh + i][hw] = "│";
+  state.grid[hh][hw] = "┼";
 
   return state;
 }
